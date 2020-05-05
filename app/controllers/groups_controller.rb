@@ -21,27 +21,28 @@ class GroupsController < ApplicationController
     @group = Group.new(group_params)
 
       if @group.save
-        redirect_to groups_path, notice: "creat success!"
+        redirect_to groups_path, notice: 'creat success!'
       else
         render :new
       end
   end
 
   def update
-    @group = Group.find(params[:id])
-
-    if @group.update(group_params)
-      redirect_to groups_path, notice: "update success"
-    else
-      render :edit
+      @group = Group.find(params[:id])
+      if @group.update(group_params)
+        redirect_to groups_path, notice: 'Update Success'
+      else
+        render :edit
+      end
     end
-  end
 
-  def destroy
-    @group = Group.find(params[:id])
-    @group.destroy
-    redirect_to groups_path, confirm: "Are you sure?"
-  end
+    def destroy
+      @group = Group.find(params[:id])
+
+      @group.destroy
+      redirect_to groups_path, alert: 'Group deleted'
+    end
+
   private
 
   def group_params
